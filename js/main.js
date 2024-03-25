@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-import * as TWT from 'tween';
-// import * as TWEEN2 from 'tween2';
+// import * as TWT from '/js/tween.umd.js';
 
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -24,6 +23,7 @@ const cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
 
 camera.position.z = 5;
+
 
 const tween = new TWEEN.Tween({x: 0, y: 0}) // Create a new tween that modifies 'coords'.
 		.to({x: 300, y: 200}, 1000) // Move to (300, 200) in 1 second.
