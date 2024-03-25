@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-import * as TWEEN from 'tween';
-import * as TWEEN2 from 'tween2';
+import * as TWT from 'tween';
+// import * as TWEEN2 from 'tween2';
+
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
@@ -24,6 +25,16 @@ scene.add( cube );
 
 camera.position.z = 5;
 
+const tween = new TWEEN.Tween({x: 0, y: 0}) // Create a new tween that modifies 'coords'.
+		.to({x: 300, y: 200}, 1000) // Move to (300, 200) in 1 second.
+		.easing(TWEEN.Easing.Quadratic.InOut) // Use an easing function to make the animation smooth.
+		.onUpdate(() => {
+			// Called after tween.js updates 'coords'.
+			// Move 'box' to the position described by 'coords' with a CSS translation.
+			// box.style.setProperty('transform', 'translate(' + coords.x + 'px, ' + coords.y + 'px)')
+			console.log("Yooo");
+		})
+		.start() // Start the tween immediately.
 
 // ##############################################
 // #                HANDLE CANVAS               #
@@ -42,13 +53,15 @@ var mainRequestAnimation;
 const FRAME_PER_SECOND = 1000 / 60;
 
 function animate() {
-	animateLoop = setTimeout(() => {
-		mainRequestAnimation = requestAnimationFrame(animate);
-	}, FRAME_PER_SECOND );
+	// animateLoop = setTimeout(() => {
+	// 	mainRequestAnimation = requestAnimationFrame(animate);
+	// }, FRAME_PER_SECOND );
+	requestAnimationFrame(animate)
 
 	cube.rotation.x += 0.01;
 	cube.rotation.y += 0.01;
 
+	TWEEN.update();
 	renderer.render( scene, camera );
 }
 
